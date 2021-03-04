@@ -1,113 +1,41 @@
 
-                         + : addition
-                         - : subtraction
-                         * : multiplication
-                         / : division
-                         % : percentage
-                         e : 2.718281...
-                        pi : 3.141592... 
-                      sine : sin(rad)
-                    cosine : cos(rad)
-                   exponent: x^y
-                   tangent : tan(rad)
-                 remainder : XmodY
-               square root : sqrt(n)
-  round to nearest integer : round(n)
-convert degrees to radians : rad(deg)
-absolute value             : aval(n)
-"""
+def add(x, y):
+    return x + y
+def subtract(x, y):
+    return x - y
+def multiply(x, y):
+    return x * y
+def divide(x, y):
+    return x / y
 
-import sys
-import math
-## Imported math library to run sin(), cos(), tan() and other such functions in the calculator 
+print("=====================================================================================================")
+print("========================================CALCULATOR===================================================")
 
-from fileinfo import raw_input
+print("Select operation.")
+print("1.Add")
+print("2.Subtract")
+print("3.Multiply")
+print("4.Divide")
 
+while True:
+    choice = input("Enter choice(1/2/3/4): ")
 
-def calc(term):
-    """
-        input: term of type str
-        output: returns the result of the computed term.
-        purpose: This function is the actual calculator and the heart of the application
-    """
+    if choice in ('1', '2', '3', '4'):
+        num1 = float(input("Enter first number: "))
+        num2 = float(input("Enter second number: "))
 
-    # This part is for reading and converting arithmetic terms.
-    term = term.replace(' ', '')
-    term = term.replace('^', '**')
-    term = term.replace('=', '')
-    term = term.replace('?', '')
-    term = term.replace('%', '/100.00')
-    term = term.replace('rad', 'radians')
-    term = term.replace('mod', '%')
-    term = term.replace('aval', 'abs')
-    
-    functions = ['sin', 'cos', 'tan', 'pow', 'cosh', 'sinh', 'tanh', 'sqrt', 'pi', 'radians', 'e']
+        if choice == '1':
+            print(num1, "+", num2, "=", add(num1, num2))
 
+        elif choice == '2':
+            print(num1, "-", num2, "=", subtract(num1, num2))
 
-    term = term.lower()
+        elif choice == '3':
+            print(num1, "*", num2, "=", multiply(num1, num2))
 
-    for func in functions:
-        if func in term:
-            withmath = 'math.' + func
-            term = term.replace(func, withmath)
-
-    try:
-
-        # here goes the actual evaluating.
-        term = eval(term)
-
-    # here goes to the error cases.
-    except ZeroDivisionError:
-
-        print("Can't divide by 0.  Please try again.")
-
-    except NameError:
-
-        print('Invalid input.  Please try again')
-
-    except AttributeError:
-
-        print('Please check usage method and try again.')
-    except TypeError:
-        print("please enter inputs of correct datatype ")
-
-    return term
-
-
-def result(term):
-    """
-        input:  term of type str
-        output: none
-        purpose: passes the argument to the function calc(...) and 
-                prints the result onto console.
-    """
-    print("\n" + str(calc(term)))
-
-
-def main():
-    """
-        main-program
-        purpose: handles user input and prints 
-                 information to the console.
-    """
-
-    print("\nScientific Calculator\n\nFor Example: sin(rad(90)) + 50% * (sqrt(16)) + round(1.42^2)" +
-          "- 12mod3\n\nEnter quit to exit")
-
-    if sys.version_info.major >= 3:
-        while True:
-            k = input("\nWhat is ")
-            if k == 'quit':
-                break
-            result(k)
-
+        elif choice == '4':
+            print(num1, "/", num2, "=", divide(num1, num2))
+        break
     else:
-        while True:
-            k = raw_input("\nWhat is ")
-            if k == 'quit':
-                break
-            result(k)
-
-
-if __name__ == '__main__':
-    main()
+        print("Invalid Input")
+print("=====================================================================================================")
